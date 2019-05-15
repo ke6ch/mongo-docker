@@ -1,0 +1,21 @@
+version: '3.3'
+ 
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo
+    env_file: .env
+    # admin用の環境設定
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    volumes:
+      - ./db:/data/db
+      - ./configdb:/data/configdb
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 27017:27017
+    # データベースサイズを小さくしておく
+    command: --smallfiles
