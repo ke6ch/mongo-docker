@@ -7,5 +7,8 @@ docker-compose up
 ```
 
 ```
-mongo -u "" -p "" --authenticationDatabase=""
+mongo -u "" -p "" --authenticationDatabase="admin"
+
+use admin
+db.system.users.find();
 ```
